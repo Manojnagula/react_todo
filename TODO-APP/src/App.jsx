@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import TodoList from "./Components/TodoList/TodoList";
 import AddTodo from "./Components/AddTodo/AddTodo";
+import TodoContext from "./context/TodoContext";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -10,15 +11,14 @@ function App() {
     { isFinished: true, text: "todo3", id: 3 },
   ]);
 
-  function addTodos(todoText) {
-    let nextId = todos.length + 1;
-    setTodos([...todos, { id: nextId, isFinished: false, text: todoText }]);
-  }
+  
 
   return (
     <>
-      <AddTodo addTodos={addTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+    <TodoContext.Provider value={{todos, setTodos}}>
+      <AddTodo  />
+      <TodoList />
+      </TodoContext.Provider>
     </>
   );
 }
