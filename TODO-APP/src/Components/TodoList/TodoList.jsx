@@ -10,7 +10,17 @@ function TodoList({ todos, setTodos }) {
       if (todo.id == id) {
         todo.text = newTodo;
       }
-      return todo;
+      return todo; 
+    });
+    setTodos(newTodoList);
+  }
+
+  function onFinished(id, state){
+    const newTodoList = todos.map((todo) => {
+      if (todo.id == id) {
+        todo.isFinished = state;
+      }
+      return todo; 
     });
     setTodos(newTodoList);
   }
@@ -25,6 +35,7 @@ function TodoList({ todos, setTodos }) {
         isFinished={todo.isFinished}
         deleteTodo={() => onDeleteTodo(todo.id)}
         editTodo={(newTodo) => onEditTodo(todo.id, newTodo)}
+        finishTodo={(state)=> onFinished(todo.id, state)}
       />
     ))
   );

@@ -9,7 +9,7 @@ function AddTodo({ addTodos }) {
         placeholder="Add your next todo...."
         type="text"
         onChange={(e) => setTodoText(e.target.value)}
-        value={todoText}s
+        value={todoText}
       />
       <button
         onClick={() => {
