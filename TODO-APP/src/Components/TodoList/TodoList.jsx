@@ -17,7 +17,6 @@ function TodoList() {
   }
 
   function onFinished(id, state){
- 
     dispatch({type:'finish_todo',payload: {id,state}})
   }
 
@@ -30,8 +29,13 @@ function TodoList() {
         id={todo.id}
         isFinished={todo.isFinished}
         deleteTodo={() => onDeleteTodo(todo.id)}
-        editTodo={(newTodo) => onEditTodo(todo.id, newTodo)}
-        finishTodo={(state)=> onFinished(todo.id, state)}
+        // newTodo = new text of edited todo. argument inherited from TODO component.
+        editTodo={(newTodo) => {onEditTodo(todo.id, newTodo)
+        }}
+        // state = checked state(true/false) from finishTodo args in TODO component. argument inherited from TODO component.
+        finishTodo={(state)=>{ onFinished(todo.id, state)
+      }}
+      
       />
     ))
   );
