@@ -1,23 +1,21 @@
-import { useContext } from "react";
 import Todo from "../Todo/Todo";
-import TodoContext from "../../context/TodoContext";
+import { useDispatch, useSelector } from "react-redux";
 
 function TodoList() {
-  const {todos, dispatch} = useContext(TodoContext);
-  
-  function onDeleteTodo(id) {
-  
-    dispatch({type: 'delete_todo', payload:{id}})
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos); 
+  // The state here represents application state, The very syntax 
+  //  selector function is such that, no matter what name you give to that parameter it represents state of the application.
 
+  function onDeleteTodo(id) {
+    dispatch({ type: "delete_todo", payload: { id } });
   }
   function onEditTodo(id, newTodo) {
-  
-    dispatch({type: 'edit_todo', payload:{id,newTodo}})
-  
+    dispatch({ type: "edit_todo", payload: { id, newTodo } });
   }
 
-  function onFinished(id, state){
-    dispatch({type:'finish_todo',payload: {id,state}})
+  function onFinished(id, state) {
+    dispatch({ type: "finish_todo", payload: { id, state } });
   }
 
   return (
@@ -30,12 +28,13 @@ function TodoList() {
         isFinished={todo.isFinished}
         deleteTodo={() => onDeleteTodo(todo.id)}
         // newTodo = new text of edited todo. argument inherited from TODO component.
-        editTodo={(newTodo) => {onEditTodo(todo.id, newTodo)
+        editTodo={(newTodo) => {
+          onEditTodo(todo.id, newTodo);
         }}
         // state = checked state(true/false) from finishTodo args in TODO component. argument inherited from TODO component.
-        finishTodo={(state)=>{ onFinished(todo.id, state)
-      }}
-      
+        finishTodo={(state) => {
+          onFinished(todo.id, state);
+        }}
       />
     ))
   );
